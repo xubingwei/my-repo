@@ -3,9 +3,20 @@ title: "ggplot2"
 author: "xbw"
 date: "2025-09-17"
 output: html_document
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+alt + shift + k 显示所有快捷操作 ctrl + l 清空屏幕
+install.packages(“包名”) 下载安装包 library(包名) 载入包
+
+## 在新的计算机上安装所有的包
+
+1. installed.packages() 显示所有已安装包 
+2. installed.packages()[,1] 获取第一列，即所有的包名
+3. save(Rpack,file="Rpack.Rdata") 将
