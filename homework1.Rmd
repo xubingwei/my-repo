@@ -2,7 +2,9 @@
 title: "homework1"
 author: "xbw"
 date: "2025-09-17"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -56,6 +58,8 @@ iowa.df[2,]
 MB.Ch1.2.
 
 ```{r}
+install.packages("DAAG")
+library(DAAG)
 #Create a new data frame by extracting these rows from orings
 orings_subset <- orings[c(1,2,4,11,13,18), ] 
 #plot total incidents against temperature for this new data frame
@@ -124,6 +128,6 @@ dotchart(Manitoba.lakes$area, labels = row.names(Manitoba.lakes), main = "Area o
 MB.Ch1.8.
 
 ```{r}
-#计算了所有列出的湖泊面积之和，作为曼尼托巴省被水覆盖面积的下界
+#计算了所有列出的湖泊面积之和，作为Manitoba被水覆盖面积的下界
 total_water_area <- sum(Manitoba.lakes$area)
 ```
