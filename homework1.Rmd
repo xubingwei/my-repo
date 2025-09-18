@@ -64,13 +64,15 @@ plot(orings_subset$Temperature,orings_subset$Total,xlab = "Temperature",ylab="To
 plot(orings$Temperature,orings$Total,xlab = "Temperature",ylab="Total Incidents", main = "ORing Damage vs Temperature")
 ```
 
-MB.Ch1.4.
-(a).
+MB.Ch1.4. (a).
+
 ```{r}
 str(ais) 
 colSums(is.na(ais))#统计ais中每一列缺失值的数量，结果都为0，所以全都没有缺失值
 ```
+
 (b).
+
 ```{r}
 #Make a table that shows the numbers of males and females for each different sport
 sport_sex_table <- table(ais$sport, ais$sex)
@@ -95,7 +97,9 @@ imbalanced_sports <- sport_sex_df %>% group_by(Sport) %>% summarise(
   Total = sum(Count),
   Ratio = round(Male / Female, 2)) %>% filter(Ratio > 2 | Ratio < 0.5 | is.infinite(Ratio))
 ```
+
 MB.Ch1.6.
+
 ```{r}
  col1 <- c("Winnipeg","Winnipegosis","Manitoba","SouthernIndian","Cedar","Island","Gods","Cross","Playgreen")
  col2 <- c(217,254,248,254,253,227,178,207,217)
@@ -104,17 +108,22 @@ MB.Ch1.6.
  Manitoba.lakes <- data.frame("elevation" = col2,"area" = col3) #设置列名
  row.names(Manitoba.lakes) <- col1 #设置行名
 ```
-MB.Ch1.7.
-(a)
+
+MB.Ch1.7. (a)
+
 ```{r}
 dotchart(Manitoba.lakes$area, labels = row.names(Manitoba.lakes), main = "Area of Manitoba Lakes (Linear Scale)",xlab = "Area (square km)")
 ```
-(b)
+
+(b) 
+
 ```{r}
  dotchart(log2(Manitoba.lakes$area), labels = row.names(Manitoba.lakes),main = "Area of Manitoba Lakes (Logarithmic Scale - log2)", xlab = expression(log[2](Area) ~ (km^2)))
 ```
+
 MB.Ch1.8.
+
 ```{r}
+#计算了所有列出的湖泊面积之和，作为曼尼托巴省被水覆盖面积的下界
 total_water_area <- sum(Manitoba.lakes$area)
 ```
-
