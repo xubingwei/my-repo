@@ -3,8 +3,9 @@ title: "homework1"
 author: "xbw"
 date: "2025-09-17"
 output:
-  pdf_document: default
+  word_document: default
   html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -58,7 +59,6 @@ iowa.df[2,]
 MB.Ch1.2.
 
 ```{r}
-install.packages("DAAG")
 library(DAAG)
 #Create a new data frame by extracting these rows from orings
 orings_subset <- orings[c(1,2,4,11,13,18), ] 
@@ -78,6 +78,7 @@ colSums(is.na(ais))#统计ais中每一列缺失值的数量，结果都为0，�
 (b).
 
 ```{r}
+library(dplyr)
 #Make a table that shows the numbers of males and females for each different sport
 sport_sex_table <- table(ais$sport, ais$sex)
 sport_sex_df <- as.data.frame(sport_sex_table) #将table转换为data frame

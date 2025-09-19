@@ -1,0 +1,399 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={homework1},
+  pdfauthor={xbw},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{homework1}
+\author{xbw}
+\date{2025-09-17}
+
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  a
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ iowa.df}\OtherTok{\textless{}{-}}\FunctionTok{read.csv}\NormalTok{(}\StringTok{"D:/postgraduate/data science/mynotes/data/iowa.csv"}\NormalTok{, }\AttributeTok{sep =} \StringTok{\textquotesingle{};\textquotesingle{}}\NormalTok{, }\AttributeTok{header=}\NormalTok{T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+b.33 rows and 10 columns
+
+c.Year Rain0 Temp1 Rain1 Temp2 Rain2 Temp3 Rain3 Temp4 Yield
+
+d.  The value of row 5, column 7 of iowa.df is 79.7
+
+e.  
+
+
+``` r
+iowa.df[2,]
+```
+
+```
+##   Year Rain0 Temp1 Rain1 Temp2 Rain2 Temp3 Rain3 Temp4 Yield
+## 2 1931 14.76  57.5  3.83    75  2.72  77.2   3.3  72.6  32.9
+```
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\item
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    因为vector1的元素被定义为character类型，所以vector1的元素在比较和排序时根据字符的ASCII码按照字典序进行，``5'',``12'',``7'',``32'',按照首个字符的ASCII码进行排序，``1''\textless{}``3''\textless{}``5''\textless{}``7'',所以max(vector1)返回``7'',sort(vector1)返回''12''
+    ``32'' ``5'' ``7'' sum()的参数不能为character,所以会报错
+  \item
+  \end{enumerate}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    当创建向量vector2 \textless-
+    c(``5'',7,12)时,由于包含了不同类型的元素，所以R会自动进行强制类型转换，以确保所有元素类型相同，因为存在字符串''5'',所以7和12都被转换为character,当执行vector2{[}2{]}
+    +
+    vector2{[}3{]}时，试图对两个字符元素（即''7''和''12''）使用加法操作符+，在R中+不能用于character，因此会抛出异常。
+  \item
+    dataframe3 \textless-
+    data.frame(z1=``5'',z2=7,z3=12)这句代码创建了一个有三列数据的dataframe，列名分别为z1,z2,z3,元素为''5'',7,12
+    dataframe3{[}1,2{]} + dataframe3{[}1,3{]}
+    将dataframe3第1行2列和3列的元素相加，返回19
+  \item
+    list4{[}{[}2{]}{]}+list4{[}{[}4{]}{]}返回结果为168，而list4{[}2{]}+list4{[}4{]}会报错，因为list4{[}{[}2{]}{]}返回的是列表list4中的第二个元素，可以直接运算；而list4{[}2{]}返回的是包含第二个元素的子列表，列表的数据类型不能进行运算。
+  \end{itemize}
+\item
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+  \end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \CommentTok{\#design an expression that will give you the sequence of numbers from 1 to 10000 in increments of 372.}
+\FunctionTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{10000}\NormalTok{,}\AttributeTok{by=}\DecValTok{372}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]    1  373  745 1117 1489 1861 2233 2605 2977 3349 3721 4093 4465 4837 5209
+## [16] 5581 5953 6325 6697 7069 7441 7813 8185 8557 8929 9301 9673
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Design another that will give you a sequence between 1 and 10000 that is exactly 50 numbers in length.}
+\FunctionTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{10000}\NormalTok{,}\AttributeTok{by=}\NormalTok{(}\DecValTok{10000}\SpecialCharTok{/}\DecValTok{50}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]    1  201  401  601  801 1001 1201 1401 1601 1801 2001 2201 2401 2601 2801
+## [16] 3001 3201 3401 3601 3801 4001 4201 4401 4601 4801 5001 5201 5401 5601 5801
+## [31] 6001 6201 6401 6601 6801 7001 7201 7401 7601 7801 8001 8201 8401 8601 8801
+## [46] 9001 9201 9401 9601 9801
+\end{verbatim}
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \setcounter{enumii}{1}
+  \tightlist
+  \item
+    rep(1:3, times=3) 是将整个向量重复3次，输出为123123123；而rep(1:3,
+    each=3)是将向量中每个元素重复三次，输出为111222333
+  \end{enumerate}
+\end{enumerate}
+
+MB.Ch1.2.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(DAAG)}
+\CommentTok{\#Create a new data frame by extracting these rows from orings}
+\NormalTok{orings\_subset }\OtherTok{\textless{}{-}}\NormalTok{ orings[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{11}\NormalTok{,}\DecValTok{13}\NormalTok{,}\DecValTok{18}\NormalTok{), ] }
+\CommentTok{\#plot total incidents against temperature for this new data frame}
+\FunctionTok{plot}\NormalTok{(orings\_subset}\SpecialCharTok{$}\NormalTok{Temperature,orings\_subset}\SpecialCharTok{$}\NormalTok{Total,}\AttributeTok{xlab =} \StringTok{"Temperature"}\NormalTok{,}\AttributeTok{ylab=}\StringTok{"Total Incidents"}\NormalTok{, }\AttributeTok{main =} \StringTok{"ORing Damage vs Temperature"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{homework1_files/figure-latex/unnamed-chunk-4-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#plot for the full dataset}
+\FunctionTok{plot}\NormalTok{(orings}\SpecialCharTok{$}\NormalTok{Temperature,orings}\SpecialCharTok{$}\NormalTok{Total,}\AttributeTok{xlab =} \StringTok{"Temperature"}\NormalTok{,}\AttributeTok{ylab=}\StringTok{"Total Incidents"}\NormalTok{, }\AttributeTok{main =} \StringTok{"ORing Damage vs Temperature"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{homework1_files/figure-latex/unnamed-chunk-4-2.pdf}}
+
+MB.Ch1.4. (a).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(ais) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    202 obs. of  13 variables:
+##  $ rcc   : num  3.96 4.41 4.14 4.11 4.45 4.1 4.31 4.42 4.3 4.51 ...
+##  $ wcc   : num  7.5 8.3 5 5.3 6.8 4.4 5.3 5.7 8.9 4.4 ...
+##  $ hc    : num  37.5 38.2 36.4 37.3 41.5 37.4 39.6 39.9 41.1 41.6 ...
+##  $ hg    : num  12.3 12.7 11.6 12.6 14 12.5 12.8 13.2 13.5 12.7 ...
+##  $ ferr  : num  60 68 21 69 29 42 73 44 41 44 ...
+##  $ bmi   : num  20.6 20.7 21.9 21.9 19 ...
+##  $ ssf   : num  109.1 102.8 104.6 126.4 80.3 ...
+##  $ pcBfat: num  19.8 21.3 19.9 23.7 17.6 ...
+##  $ lbm   : num  63.3 58.5 55.4 57.2 53.2 ...
+##  $ ht    : num  196 190 178 185 185 ...
+##  $ wt    : num  78.9 74.4 69.1 74.9 64.6 63.7 75.2 62.3 66.5 62.9 ...
+##  $ sex   : Factor w/ 2 levels "f","m": 1 1 1 1 1 1 1 1 1 1 ...
+##  $ sport : Factor w/ 10 levels "B_Ball","Field",..: 1 1 1 1 1 1 1 1 1 1 ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{colSums}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(ais))}\CommentTok{\#统计ais中每一列缺失值的数量，结果都为0，所以全都没有缺失值}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    rcc    wcc     hc     hg   ferr    bmi    ssf pcBfat    lbm     ht     wt 
+##      0      0      0      0      0      0      0      0      0      0      0 
+##    sex  sport 
+##      0      0
+\end{verbatim}
+
+(b).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Make a table that shows the numbers of males and females for each different sport}
+\NormalTok{sport\_sex\_table }\OtherTok{\textless{}{-}} \FunctionTok{table}\NormalTok{(ais}\SpecialCharTok{$}\NormalTok{sport, ais}\SpecialCharTok{$}\NormalTok{sex)}
+\NormalTok{sport\_sex\_df }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(sport\_sex\_table) }\CommentTok{\#将table转换为data frame}
+\FunctionTok{colnames}\NormalTok{(sport\_sex\_df) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Sport"}\NormalTok{, }\StringTok{"Sex"}\NormalTok{, }\StringTok{"Count"}\NormalTok{) }\CommentTok{\#修改列名}
+\NormalTok{grouped\_data }\OtherTok{\textless{}{-}} \FunctionTok{group\_by}\NormalTok{(sport\_sex\_df,Sport) }\CommentTok{\#将数据根据运动分组}
+\CommentTok{\#统计}
+\NormalTok{summarized\_data }\OtherTok{\textless{}{-}} \FunctionTok{summarise}\NormalTok{(}
+\NormalTok{  grouped\_data,}
+  \AttributeTok{Male =} \FunctionTok{sum}\NormalTok{(Count[Sex }\SpecialCharTok{==} \StringTok{"m"}\NormalTok{]),}
+  \AttributeTok{Female =} \FunctionTok{sum}\NormalTok{(Count[Sex }\SpecialCharTok{==} \StringTok{"f"}\NormalTok{]),}
+  \AttributeTok{Total =} \FunctionTok{sum}\NormalTok{(Count),}
+  \AttributeTok{Ratio =} \FunctionTok{round}\NormalTok{(Male }\SpecialCharTok{/}\NormalTok{ Female, }\DecValTok{2}\NormalTok{)}
+\NormalTok{)}
+\CommentTok{\#筛选出男女比例大于2的运动}
+\NormalTok{imbalanced\_sports }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(summarized\_data,Ratio }\SpecialCharTok{\textgreater{}} \DecValTok{2} \SpecialCharTok{|}\NormalTok{ Ratio }\SpecialCharTok{\textless{}} \FloatTok{0.5} \SpecialCharTok{|} \FunctionTok{is.infinite}\NormalTok{(Ratio))}
+\FunctionTok{print}\NormalTok{(imbalanced\_sports)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4 x 5
+##   Sport    Male Female Total  Ratio
+##   <fct>   <int>  <int> <int>  <dbl>
+## 1 Gym         0      4     4   0   
+## 2 Netball     0     23    23   0   
+## 3 T_Sprnt    11      4    15   2.75
+## 4 W_Polo     17      0    17 Inf
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#或者使用管道运算符}
+\NormalTok{imbalanced\_sports }\OtherTok{\textless{}{-}}\NormalTok{ sport\_sex\_df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{group\_by}\NormalTok{(Sport) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{summarise}\NormalTok{( }
+  \AttributeTok{Male =} \FunctionTok{sum}\NormalTok{(Count[Sex }\SpecialCharTok{==} \StringTok{"m"}\NormalTok{]),}
+  \AttributeTok{Female =} \FunctionTok{sum}\NormalTok{(Count[Sex }\SpecialCharTok{==} \StringTok{"f"}\NormalTok{]),}
+  \AttributeTok{Total =} \FunctionTok{sum}\NormalTok{(Count),}
+  \AttributeTok{Ratio =} \FunctionTok{round}\NormalTok{(Male }\SpecialCharTok{/}\NormalTok{ Female, }\DecValTok{2}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(Ratio }\SpecialCharTok{\textgreater{}} \DecValTok{2} \SpecialCharTok{|}\NormalTok{ Ratio }\SpecialCharTok{\textless{}} \FloatTok{0.5} \SpecialCharTok{|} \FunctionTok{is.infinite}\NormalTok{(Ratio))}
+\end{Highlighting}
+\end{Shaded}
+
+MB.Ch1.6.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ col1 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Winnipeg"}\NormalTok{,}\StringTok{"Winnipegosis"}\NormalTok{,}\StringTok{"Manitoba"}\NormalTok{,}\StringTok{"SouthernIndian"}\NormalTok{,}\StringTok{"Cedar"}\NormalTok{,}\StringTok{"Island"}\NormalTok{,}\StringTok{"Gods"}\NormalTok{,}\StringTok{"Cross"}\NormalTok{,}\StringTok{"Playgreen"}\NormalTok{)}
+\NormalTok{ col2 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{217}\NormalTok{,}\DecValTok{254}\NormalTok{,}\DecValTok{248}\NormalTok{,}\DecValTok{254}\NormalTok{,}\DecValTok{253}\NormalTok{,}\DecValTok{227}\NormalTok{,}\DecValTok{178}\NormalTok{,}\DecValTok{207}\NormalTok{,}\DecValTok{217}\NormalTok{)}
+\NormalTok{ col3 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{24387}\NormalTok{,}\DecValTok{5374}\NormalTok{,}\DecValTok{4624}\NormalTok{,}\DecValTok{2247}\NormalTok{,}\DecValTok{1353}\NormalTok{,}\DecValTok{1223}\NormalTok{,}\DecValTok{1151}\NormalTok{,}\DecValTok{755}\NormalTok{,}\DecValTok{657}\NormalTok{)}
+\NormalTok{ Manitoba.lakes }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(col2, col3) }\CommentTok{\#生成data frame}
+\NormalTok{ Manitoba.lakes }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\StringTok{"elevation"} \OtherTok{=}\NormalTok{ col2,}\StringTok{"area"} \OtherTok{=}\NormalTok{ col3) }\CommentTok{\#设置列名}
+ \FunctionTok{row.names}\NormalTok{(Manitoba.lakes) }\OtherTok{\textless{}{-}}\NormalTok{ col1 }\CommentTok{\#设置行名}
+\end{Highlighting}
+\end{Shaded}
+
+MB.Ch1.7. (a)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dotchart}\NormalTok{(Manitoba.lakes}\SpecialCharTok{$}\NormalTok{area, }\AttributeTok{labels =} \FunctionTok{row.names}\NormalTok{(Manitoba.lakes), }\AttributeTok{main =} \StringTok{"Area of Manitoba Lakes (Linear Scale)"}\NormalTok{,}\AttributeTok{xlab =} \StringTok{"Area (square km)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{homework1_files/figure-latex/unnamed-chunk-8-1.pdf}}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \FunctionTok{dotchart}\NormalTok{(}\FunctionTok{log2}\NormalTok{(Manitoba.lakes}\SpecialCharTok{$}\NormalTok{area), }\AttributeTok{labels =} \FunctionTok{row.names}\NormalTok{(Manitoba.lakes),}\AttributeTok{main =} \StringTok{"Area of Manitoba Lakes (Logarithmic Scale {-} log2)"}\NormalTok{, }\AttributeTok{xlab =} \FunctionTok{expression}\NormalTok{(log[}\DecValTok{2}\NormalTok{](Area) }\SpecialCharTok{\textasciitilde{}}\NormalTok{ (km}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{homework1_files/figure-latex/unnamed-chunk-9-1.pdf}}
+
+MB.Ch1.8.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#计算了所有列出的湖泊面积之和，作为Manitoba被水覆盖面积的下界}
+\NormalTok{total\_water\_area }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(Manitoba.lakes}\SpecialCharTok{$}\NormalTok{area)}
+\end{Highlighting}
+\end{Shaded}
+
+
+\end{document}
