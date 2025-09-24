@@ -150,5 +150,57 @@ cor(ca_pa[ca_pa$STATEFP == 6 & ca_pa$COUNTYFP == 85,c("Median_house_value","Buil
 # 0.1868602
 cor(ca_pa[ca_pa$STATEFP == 42 & ca_pa$COUNTYFP == 3,c("Median_house_value","Built_2005_or_later")],use = "complete.obs")
 ```
-       
-       
+e.
+```{r}
+#先将三个城市的信息提取出来
+ca_pa_sub <- ca_pa[ca_pa$STATEFP == 6 & ca_pa$COUNTYFP == 1 |ca_pa$STATEFP == 6 & ca_pa$COUNTYFP == 85 | ca_pa$STATEFP == 42 & ca_pa$COUNTYFP == 3,c("STATEFP","COUNTYFP","Median_house_value","Median_household_income")]
+#添加城市列名
+ca_pa_sub$County <- ifelse(
++     ca_pa_sub$STATEFP == 6 & ca_pa_sub$COUNTYFP == 1, "Alameda",
++     ifelse(
++         ca_pa_sub$STATEFP == 6 & ca_pa_sub$COUNTYFP == 85, "Santa Clara",
++         "Allegheny"
++     )
++ )
+#画出三个城市的图，用County区分
+ca_pa_sub |> ggplot()+aes(x=Median_house_value,y=Median_household_income,color=County,shape = County)+geom_point() + labs(x="Median_house_value",y="Median_household_income",color="County",shape = "County")
+```
+MB.Ch1.11. 
+```{r}
+#将"female"重复91次，"male"重复92次连接成一个字符串向量，将字符串向量转化为一个因子
+gender <- factor(c(rep("female", 91), rep("male", 92)))
+ table(gender)#统计gender因子中的每个水平的频次
+ 
+ gender <- factor(gender, levels=c("male", "female")) #将因子gender的水平顺序从默认顺序改为指定的c("male", "female")顺序
+ 
+ gender <- factor(gender, levels=c("Male", "female"))
+ #"male"无法匹配"Male"，所以被转为NA
+ table(gender, exclude=NULL)
+ #exclude = NULL：强制显示所有水平，包括NA的计数，上面92个"male"被转换为了NA，所以显示92个NA
+```
+MB.Ch1.12.
+```{r}
+proportion_fun <- function(x,cutoff){
+  #统计x中大于cutoff的数量
+  above_cutoff <- sum(x>cutoff,na.rm=TRUE)
+  #统计x的总数
+  total <- sum(!is.na(x))
+  return (above_cutoff/total)#返回超过cutoff的比例
+}
+```
+(a).
+```{r}
+test1 <- 1:100
+proportion_fun(test1,25) #0.75
+proportion_fun(test1,76) #0.24
+```
+(b).
+```{r}
+install.packages("Devore7")
+library(Devore7)
+data(ex01.36)
+escape_times <- ex01.36
+dotplot(~escape_times)
+proportion_fun(escape_times,420) #0.03846154
+```
+MB.Ch1.18.
