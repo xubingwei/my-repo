@@ -2,11 +2,15 @@
 title: "homework2"
 author: "xbw"
 date: "2025-09-19"
-output: html_document
+output:
+  html_document: default
+  word_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+options(repos = c(CRAN = "https://mirrors.zju.edu.cn/CRAN/" )) # 设置CRAN镜像
 ```
 
 1.  
@@ -14,7 +18,7 @@ knitr::opts_chunk$set(echo = TRUE)
     a.  
 
     ```{r}
-    ca_pa <- read.csv("D:/postgraduate/data science/mynotes/data/calif_penn_2011.csv")
+    ca_pa <- read.csv("E:/postgraduate/data science/mynotes/data/calif_penn_2011.csv")
     ```
 
     b.  
@@ -32,13 +36,16 @@ knitr::opts_chunk$set(echo = TRUE)
     ca_pa_omitna <- na.omit(ca_pa)
     ```
 
-    e.omitted 10576 rows f.(c)和(e)的答案不一致，因为(c)统计的是每一列有多少个元素是na，而(e)删除的是有na元素的行
+    e.omitted 10576 rows\
+    f.(c)和(e)的答案不一致，因为(c)统计的是每一列有多少个元素是na，而(e)删除的是有na元素的行
 
 2.  
 
     a.  
 
     ```{r}
+    install.packages("tidyverse")
+    library(tidyverse)
     # Plot median house prices 与 Built_2005_or_later的关系
     ca_pa_omitna |> ggplot()+aes(x=Built_2005_or_later,y=Median_house_value)+geom_point()+ labs( x = "Built_2005_or_later", y = "Median_house_value")
     ```
@@ -125,47 +132,57 @@ knitr::opts_chunk$set(echo = TRUE)
     cor(ca_pa$Median_house_value,ca_pa$Built_2005_or_later,use = "complete.obs")
 
     ```
-       (ii). all of California
-```{r}
-# 0.2339447
- cor(ca_pa[ca_pa$STATEFP == 42,c("Median_house_value","Built_2005_or_later")],use = "complete.obs")
-```
-     (iii). all of Pennsylvania  
-```{r}
-# -0.1160322
-cor(ca_pa[ca_pa$STATEFP == 6,c("Median_house_value","Built_2005_or_later")],use = "complete.obs")
-```
-     (iv). Alameda County
-```{r}
-#  0.01432789
-cor(ca_pa[ca_pa$STATEFP == 6 & ca_pa$COUNTYFP == 1,c("Median_house_value","Built_2005_or_later")],use = "complete.obs")
-```
-      (v). Santa Clara County 
-```{r}
-# -0.1726203
-cor(ca_pa[ca_pa$STATEFP == 6 & ca_pa$COUNTYFP == 85,c("Median_house_value","Built_2005_or_later")],use = "complete.obs")
-```
-      (vi). Allegheny County
-```{r}
-# 0.1868602
-cor(ca_pa[ca_pa$STATEFP == 42 & ca_pa$COUNTYFP == 3,c("Median_house_value","Built_2005_or_later")],use = "complete.obs")
-```
-e.
+
+    (ii). all of California
+
+    ```{r}
+    # 0.2339447
+     cor(ca_pa[ca_pa$STATEFP == 42,c("Median_house_value","Built_2005_or_later")],use = "complete.obs")
+    ```
+
+    (iii). all of Pennsylvania
+
+    ```{r}
+    # -0.1160322
+    cor(ca_pa[ca_pa$STATEFP == 6,c("Median_house_value","Built_2005_or_later")],use = "complete.obs")
+    ```
+
+    (iv). Alameda County
+
+    ```{r}
+    #  0.01432789
+    cor(ca_pa[ca_pa$STATEFP == 6 & ca_pa$COUNTYFP == 1,c("Median_house_value","Built_2005_or_later")],use = "complete.obs")
+    ```
+
+    (v). Santa Clara County
+
+    ```{r}
+    # -0.1726203
+    cor(ca_pa[ca_pa$STATEFP == 6 & ca_pa$COUNTYFP == 85,c("Median_house_value","Built_2005_or_later")],use = "complete.obs")
+    ```
+
+    (vi). Allegheny County
+
+    ```{r}
+    # 0.1868602
+    cor(ca_pa[ca_pa$STATEFP == 42 & ca_pa$COUNTYFP == 3,c("Median_house_value","Built_2005_or_later")],use = "complete.obs")
+    ```
+
+<!-- -->
+
+e.  
+
 ```{r}
 #先将三个城市的信息提取出来
 ca_pa_sub <- ca_pa[ca_pa$STATEFP == 6 & ca_pa$COUNTYFP == 1 |ca_pa$STATEFP == 6 & ca_pa$COUNTYFP == 85 | ca_pa$STATEFP == 42 & ca_pa$COUNTYFP == 3,c("STATEFP","COUNTYFP","Median_house_value","Median_household_income")]
 #添加城市列名
-ca_pa_sub$County <- ifelse(
-+     ca_pa_sub$STATEFP == 6 & ca_pa_sub$COUNTYFP == 1, "Alameda",
-+     ifelse(
-+         ca_pa_sub$STATEFP == 6 & ca_pa_sub$COUNTYFP == 85, "Santa Clara",
-+         "Allegheny"
-+     )
-+ )
+ca_pa_sub$County <- ifelse(ca_pa_sub$STATEFP == 6 & ca_pa_sub$COUNTYFP == 1, "Alamed", ifelse(ca_pa_sub$STATEFP == 6 & ca_pa_sub$COUNTYFP == 85, "Santa Clara","Allegheny"))
 #画出三个城市的图，用County区分
 ca_pa_sub |> ggplot()+aes(x=Median_house_value,y=Median_household_income,color=County,shape = County)+geom_point() + labs(x="Median_house_value",y="Median_household_income",color="County",shape = "County")
 ```
-MB.Ch1.11. 
+
+MB.Ch1.11.
+
 ```{r}
 #将"female"重复91次，"male"重复92次连接成一个字符串向量，将字符串向量转化为一个因子
 gender <- factor(c(rep("female", 91), rep("male", 92)))
@@ -178,7 +195,9 @@ gender <- factor(c(rep("female", 91), rep("male", 92)))
  table(gender, exclude=NULL)
  #exclude = NULL：强制显示所有水平，包括NA的计数，上面92个"male"被转换为了NA，所以显示92个NA
 ```
+
 MB.Ch1.12.
+
 ```{r}
 proportion_fun <- function(x,cutoff){
   #统计x中大于cutoff的数量
@@ -188,13 +207,17 @@ proportion_fun <- function(x,cutoff){
   return (above_cutoff/total)#返回超过cutoff的比例
 }
 ```
+
 (a).
+
 ```{r}
 test1 <- 1:100
 proportion_fun(test1,25) #0.75
 proportion_fun(test1,76) #0.24
 ```
+
 (b).
+
 ```{r}
 install.packages("Devore7")
 library(Devore7)
@@ -203,4 +226,16 @@ escape_times <- ex01.36
 dotplot(~escape_times)
 proportion_fun(escape_times,420) #0.03846154
 ```
+
 MB.Ch1.18.
+
+```{r}
+#将Rabbit根据Treatment、Dose、Animal的优先级排序
+rabbit_sorted <- Rabbit[order(Rabbit$Treatment, Rabbit$Dose, Rabbit$Animal), ]
+# 使用unstack将Animal展开为列
+rabbit_unstack1 <- unstack(rabbit_sorted, BPchange ~ Animal)
+# 提取唯一的Treatment和Dose组合
+treatment_dose_combos <- unique(rabbit_sorted[, c("Treatment", "Dose")])
+# 将treatment_dose_combos 和 rabbit_unstack1 组合成为最终结果
+rabbit_unstack <- cbind(treatment_dose_combos,rabbit_unstack1)
+```
