@@ -383,7 +383,7 @@ f.(c)和(e)的答案不一致，因为(c)统计的是每一列有多少个元素
 <pre><code>## package &#39;tidyverse&#39; successfully unpacked and MD5 sums checked
 ## 
 ## The downloaded binary packages are in
-##  C:\Users\78471\AppData\Local\Temp\Rtmp2HYzmM\downloaded_packages</code></pre>
+##  C:\Users\78471\AppData\Local\Temp\RtmpKa7YJP\downloaded_packages</code></pre>
 <pre class="r"><code>library(tidyverse)</code></pre>
 <pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ## ✔ dplyr     1.1.4     ✔ readr     2.1.5
@@ -552,7 +552,7 @@ proportion_fun(test1,25) #0.75</code></pre>
 <pre><code>## package &#39;Devore7&#39; successfully unpacked and MD5 sums checked
 ## 
 ## The downloaded binary packages are in
-##  C:\Users\78471\AppData\Local\Temp\Rtmp2HYzmM\downloaded_packages</code></pre>
+##  C:\Users\78471\AppData\Local\Temp\RtmpKa7YJP\downloaded_packages</code></pre>
 <pre class="r"><code>library(Devore7)</code></pre>
 <pre><code>## Loading required package: MASS</code></pre>
 <pre><code>## 
@@ -568,14 +568,31 @@ dotplot(~escape_times)</code></pre>
 <pre class="r"><code>proportion_fun(escape_times,420) #0.03846154</code></pre>
 <pre><code>## [1] 0.03846154</code></pre>
 <p>MB.Ch1.18.</p>
-<pre class="r"><code>#将Rabbit根据Treatment、Dose、Animal的优先级排序
+<pre class="r"><code>install.packages(&quot;MASS&quot;)</code></pre>
+<pre><code>## Warning: package &#39;MASS&#39; is in use and will not be installed</code></pre>
+<pre class="r"><code>library(MASS)
+#将Rabbit根据Treatment、Dose、Animal的优先级排序
 rabbit_sorted &lt;- Rabbit[order(Rabbit$Treatment, Rabbit$Dose, Rabbit$Animal), ]
 # 使用unstack将Animal展开为列
 rabbit_unstack1 &lt;- unstack(rabbit_sorted, BPchange ~ Animal)
 # 提取唯一的Treatment和Dose组合
 treatment_dose_combos &lt;- unique(rabbit_sorted[, c(&quot;Treatment&quot;, &quot;Dose&quot;)])
 # 将treatment_dose_combos 和 rabbit_unstack1 组合成为最终结果
-rabbit_unstack &lt;- cbind(treatment_dose_combos,rabbit_unstack1)</code></pre>
+rabbit_unstack &lt;- cbind(treatment_dose_combos,rabbit_unstack1)
+print(rabbit_unstack)</code></pre>
+<pre><code>##    Treatment   Dose    R1    R2    R3    R4   R5
+## 1    Control   6.25  0.50  1.00  0.75  1.25  1.5
+## 2    Control  12.50  4.50  1.25  3.00  1.50  1.5
+## 3    Control  25.00 10.00  4.00  3.00  6.00  5.0
+## 4    Control  50.00 26.00 12.00 14.00 19.00 16.0
+## 5    Control 100.00 37.00 27.00 22.00 33.00 20.0
+## 6    Control 200.00 32.00 29.00 24.00 33.00 18.0
+## 31       MDL   6.25  1.25  1.40  0.75  2.60  2.4
+## 32       MDL  12.50  0.75  1.70  2.30  1.20  2.5
+## 33       MDL  25.00  4.00  1.00  3.00  2.00  1.5
+## 34       MDL  50.00  9.00  2.00  5.00  3.00  2.0
+## 35       MDL 100.00 25.00 15.00 26.00 11.00  9.0
+## 36       MDL 200.00 37.00 28.00 25.00 22.00 19.0</code></pre>
 
 
 

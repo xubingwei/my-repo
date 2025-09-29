@@ -230,6 +230,8 @@ proportion_fun(escape_times,420) #0.03846154
 MB.Ch1.18.
 
 ```{r}
+install.packages("MASS")
+library(MASS)
 #将Rabbit根据Treatment、Dose、Animal的优先级排序
 rabbit_sorted <- Rabbit[order(Rabbit$Treatment, Rabbit$Dose, Rabbit$Animal), ]
 # 使用unstack将Animal展开为列
@@ -238,4 +240,5 @@ rabbit_unstack1 <- unstack(rabbit_sorted, BPchange ~ Animal)
 treatment_dose_combos <- unique(rabbit_sorted[, c("Treatment", "Dose")])
 # 将treatment_dose_combos 和 rabbit_unstack1 组合成为最终结果
 rabbit_unstack <- cbind(treatment_dose_combos,rabbit_unstack1)
+print(rabbit_unstack)
 ```
