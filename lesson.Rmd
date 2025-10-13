@@ -1,0 +1,22 @@
+---
+title: "课堂笔记"
+author: "xubingwei"
+date: "2025-09-29"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+data(mtcars) #1 
+mtcars |> ggplot(aes(x=wt, y=mpg)) + 
+  geom_point() + 
+  geom_smooth(method="lm", se=FALSE, color="red") + #lm =全局
+  geom_smooth(method="loess", se=FALSE,             #loess = 局部
+    color="blue", linetype="dashed") +
+    labs(title = "Basic Scatter Plot of MPG vs. Weight",
+    x = "Car Weight (lbs/1000)", y = "Miles Per Gallon")
+```
+
