@@ -159,11 +159,27 @@ n <- nrow(gmp)
    #a_se <- sqrt((((n-1)^2)/n)*var(a.means))
    return(list(y0_se=y0_se,a_se=a_se))
  }
+ 
+ plm.jackknife(y0=6611,a=0.15)
+ #y0_se = 1.217076e-08 a_se = 0.0009904572
+ plm.jackknife(y0=5000,a=0.10)
+ #y0_se = 2.033898e-08 a_se = 0.0009979824
 ```
 7.
 ```{r}
-gmp_2013 <- read.table("E:/postgraduate/data science/mynotes/data/gmp-2013.dat")
-gmp_2013$pop <- round(gmp_2013$gmp/gmp_2013$pcgmp)
-plm(y0=6611,a=0.15,N=gmp_2013$pop,Y=gmp_2013$pcgmp)
-plm.jackknife(6611,0.15,N=gmp_2013$pop,Y=gmp_2013$pcgmp)
+gmp2013 <- read.table("E:/postgraduate/data science/mynotes/data/gmp-2013.dat",header = T)
+gmp2013$pop <- round(gmp2013$gmp/gmp2013$pcgmp)
+plm(y0=6611,a=0.15,N=gmp2013$pop,Y=gmp2013$pcgmp)
+# $y0[1] 6611 $a[1] 0.1433688 $mse[1] 135210524
+plm(y0=6611,a=0.15,N=gmp$pop,Y=gmp$pcgmp)
+# $y0[1] 6611 $a[1] 0.1263182 $mse[1] 61857060
+plm(y0=5000 ,a=0.10,N=gmp2013$pop,Y=gmp2013$pcgmp)
+# $y0[1] 5000 $a[1] 0.164427 $mse[1] 139208731
+plm(y0=5000 ,a=0.10,N=gmp$pop,Y=gmp$pcgmp)
+# $y0[1] 5000 $a[1] 0.1475913 $mse[1] 62521484
+plm.jackknife(6611,0.15,N=gmp2013$pop,Y=gmp2013$pcgmp) 
+#y0_se=1.337627e-08 a_se=0.001090986
+plm.jackknife(5000,0.10,N=gmp2013$pop,Y=gmp2013$pcgmp) 
+#y0_se=6.204325e-08 a_se=0.00111528
+#2013年的模型与2006年的模型相比, y0不变,a上升了约0.02,mse增长了约一倍
 ```
