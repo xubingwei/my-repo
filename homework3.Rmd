@@ -9,12 +9,13 @@ editor_options:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE,warning = FALSE)
 ```
 
 1.  
 
 ```{r}
+library(tidyverse)
 gmp <- read.table("E:/postgraduate/data science/mynotes/data/gmp.dat")
 gmp$pop <- round(gmp$gmp/gmp$pcgmp)
 gmp <- gmp |> mutate(nlmfit_1 = 6611*pop^(1/8),nlmfit_2 = 6611*pop^0.1,nlmfit_3 = 6611*pop^0.15)
